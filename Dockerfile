@@ -1,9 +1,11 @@
-FROM maven:latest as maven-build
+FROM maven as build
 WORKDIR /build
-COPY . /build
+COPY pom.xml .
+RUN mvn verify --fail-never
+COPY . .
 RUN mvn clean package
-FROM java:8
-WORKDIR /opt/website
-EXPOSE 8085
-COPY --from=maven-build /build/target/MaintenanceAPI-0.0.1-SNAPSHOT.jar maintenance.jar
-ENTRYPOINT ["java", "-jar", "maintenance.jar"]
+
+FROM openjdk:8
+COPY --from=build /build/target/Maintenance-Api-0.0.1-SNAPSHOT.jar  maintenance.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","maintenance.jar"]
