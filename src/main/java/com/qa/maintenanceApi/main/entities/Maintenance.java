@@ -1,16 +1,12 @@
 package com.qa.maintenanceApi.main.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
 
 import com.qa.maintenanceApi.main.Constants;
 
-@Entity
 public class Maintenance {
 
 	@Id
-	@GeneratedValue
 	private long id;
 	private String issueType;
 	private String severity;

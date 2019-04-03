@@ -66,7 +66,7 @@ public class MaintenanceController {
 	}
 
 	@PutMapping(Constants.UPDATE_URL)
-	public String updateMaintenance(@PathVariable("id") long id, @RequestBody Maintenance maintenanceUpdate) {
+	public String updateMaintenance(@PathVariable("id") String id, @RequestBody Maintenance maintenanceUpdate) {
 		return this.maintenanceService.updateMaintenance(id, maintenanceUpdate);
 	}
 

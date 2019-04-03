@@ -36,7 +36,7 @@ public class MaintenanceServiceTest {
 	private List<Maintenance> maintenanceList;
 	private Maintenance maintenance;
 	private List<Maintenance> returnList;
-	private Long index;
+	private String index;
 
 	@Before
 	public void setup() {
@@ -109,15 +109,15 @@ public class MaintenanceServiceTest {
 	@Test
 	public void updateMaintenanceTest() throws CloneNotSupportedException {
 		this.maintenance = Constants.getConstructedMaintenance();
-		Mockito.when(this.maintenanceRepo.findById((Long)notNull())).thenReturn(Optional.ofNullable(this.maintenanceList.get(0)));
-		Mockito.when(this.maintenanceRepo.saveAndFlush((Maintenance)notNull())).thenAnswer((Answer<?>) invocation -> {
+		Mockito.when(this.maintenanceRepo.findById((String)notNull())).thenReturn(Optional.ofNullable(this.maintenanceList.get(0)));
+		Mockito.when(this.maintenanceRepo.save((Maintenance)notNull())).thenAnswer((Answer<?>) invocation -> {
 			this.maintenanceList.clear();
 			this.maintenanceList.add(this.maintenance);
 			this.maintenanceList.add(Constants.getConstructedMaintenance());  
 			return maintenance;
 		});
 
-		this.index = Long.valueOf(String.valueOf(0));
+		this.index = String.valueOf(String.valueOf(0));
 		this.maintenanceService.updateMaintenance(this.index, this.maintenance);
 		assertThat(this.maintenanceList.get(0).matches(Constants.getConstructedMaintenance()));
 	}
