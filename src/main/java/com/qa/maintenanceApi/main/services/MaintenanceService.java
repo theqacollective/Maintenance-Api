@@ -42,7 +42,7 @@ public class MaintenanceService {
 		return Constants.getAllDeletionMessage();
 	}
 	
-	public String updateMaintenance(Long id, Maintenance updateMaintenance) {
+	public String updateMaintenance(String id, Maintenance updateMaintenance) {
 		Maintenance maintenanceToUpdate = this.maintenanceRepo.findById(id).orElse(new Maintenance());
 		maintenanceToUpdate.setIssueType(Optional.ofNullable(updateMaintenance.getIssueType()).orElse(Optional.ofNullable(maintenanceToUpdate.getIssueType()).orElse(Constants.getNaString())));
 		maintenanceToUpdate.setSeverity(Optional.ofNullable(updateMaintenance.getSeverity()).orElse(Optional.ofNullable(maintenanceToUpdate.getSeverity()).orElse(Constants.getNaString())));
@@ -51,7 +51,8 @@ public class MaintenanceService {
 		maintenanceToUpdate.setDateReported(Optional.ofNullable(updateMaintenance.getDateReported()).orElse(Optional.ofNullable(maintenanceToUpdate.getDateReported()).orElse(Constants.getNaString())));
 		maintenanceToUpdate.setStatus(Optional.ofNullable(updateMaintenance.getStatus()).orElse(Optional.ofNullable(maintenanceToUpdate.getStatus()).orElse(Constants.getNaString())));
 		maintenanceToUpdate.setNotes(Optional.ofNullable(updateMaintenance.getNotes()).orElse(Optional.ofNullable(maintenanceToUpdate.getNotes()).orElse(Constants.getNaString())));
-		this.maintenanceRepo.saveAndFlush(maintenanceToUpdate);
+		this.maintenanceRepo.delete(maintenanceToUpdate);
+		this.maintenanceRepo.save(maintenanceToUpdate);
 		return Constants.getUpdateMesssage();
 	}
 }

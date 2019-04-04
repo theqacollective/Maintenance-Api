@@ -149,7 +149,7 @@ public class MaintenanceControllerTest {
 	@Test
 	public void testUpdateMaintenance() throws Exception {
 		this.id = controllerTestMaintenance.getId();
-		Mockito.when(this.service.updateMaintenance((Long) notNull(), (Maintenance) notNull()))
+		Mockito.when(this.service.updateMaintenance((String) notNull(), (Maintenance) notNull()))
 				.thenAnswer((Answer<?>) invocation -> {
 					this.controllerTestMaintenance = Constants.getDefaultBuilderMaintenance();
 					this.controllerTestMaintenance.setId(id);
